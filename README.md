@@ -1,28 +1,113 @@
- Chaudhary-s-Business
+Rasoi Roots
 website for homemade products
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>RasoiRoots | Pure Homemade Spices</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth }
-    body { font-family:'Segoe UI',sans-serif; background:#fcf9f4; color:#333 }
-    header { background:#a83232; color:white; display:flex; justify-content:space-between; align-items:center; padding:1rem 2rem; position:fixed; width:100%; z-index:1000 }
-    .logo { font-size:1.8rem; font-weight:bold }
-    nav a { color:white; margin-left:1rem; text-decoration:none; font-weight:500 }
-    nav a i { margin-right:5px }
-    main { padding-top:100px; max-width:1200px; margin:auto }
-    section { padding:4rem 2rem; border-bottom:1px solid #ddd }
-    .grid { display:grid; gap:1.5rem; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)) }
-    .product, .review { background:#fff; padding:1.2rem; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.1) }
-    .btn { background:#a83232; color:#fff; padding:10px 15px; border:none; border-radius:5px; margin-top:10px; cursor:pointer }
-    form input { padding:0.8rem; width:100%; max-width:400px; margin:0.5rem 0; border-radius:5px; border:1px solid #ccc }
-    iframe { width:100%; height:300px; border:none; margin-top:1rem }
-    footer { background:#a83232; color:white; text-align:center; padding:2rem 1rem }
-    h1,h2 { color:#a83232 }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth }
+    body { font-family: 'Segoe UI', sans-serif; background: #fcf9f4; color: #333 }
+
+    header {
+      background: #a83232;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      font-size: 2.2rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    nav {
+      margin-top: 0.5rem;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    nav a i {
+      margin-right: 5px;
+    }
+
+    main {
+      padding-top: 150px;
+      max-width: 1100px;
+      margin: auto;
+      text-align: center;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      justify-content: center;
+    }
+
+    .product, .review {
+      background: #fff;
+      padding: 1.2rem;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    .btn {
+      background: #a83232;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    form input {
+      padding: 0.8rem;
+      width: 90%;
+      max-width: 400px;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      margin-top: 1rem;
+    }
+
+    footer {
+      background: #a83232;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    h1, h2 {
+      color: #a83232;
+      margin-bottom: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -105,8 +190,7 @@ website for homemade products
     const email = document.getElementById('loginEmail').value.trim();
     const pass = document.getElementById('loginPass').value.trim();
     if (email && pass) {
-      // ✨ Simulated real login
-      alert('Login successful — TODO: connect backend.');
+      alert('Login successful — (Simulated)');
     } else {
       alert('Please enter email and password.');
     }
@@ -118,7 +202,7 @@ website for homemade products
     const email = document.getElementById('signupEmail').value.trim();
     const pass = document.getElementById('signupPass').value.trim();
     if (name && email && pass) {
-      alert('Account created — TODO: connect backend database.');
+      alert('Account created — (Simulated)');
     } else {
       alert('Please fill all fields.');
     }
