@@ -5,39 +5,43 @@ website for homemade products
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>RasoiRoots - Pure Homemade Spices</title>
+  <title>RasoiRoots – Pure Homemade Spices</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body, button { font-family: 'Segoe UI', sans-serif; }
-    a { text-decoration: none; color: inherit; }
-    ul { list-style: none; }
-    header { position: fixed; top: 0; width: 100%; z-index: 1000; background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .nav-container { max-width: 1200px; margin: auto; display: flex; align-items: center; justify-content: space-between; padding: 1rem; }
-    .logo { font-weight: bold; font-size: 1.5rem; color: #a83232; }
-    nav ul { display: flex; gap: 2rem; }
-    nav a { font-weight: 600; color: #333; }
-    .cart-icon { position: relative; cursor: pointer; }
-    .cart-count { position: absolute; top: -6px; right: -6px; background: #a83232; color: #fff; font-size: .75rem; padding: 2px 6px; border-radius: 50%; }
-    .hero { height: 80vh; background: #f4e9e1; display: flex; align-items: center; justify-content: center; text-align: center; color: #333; margin-top: 80px; }
-    .hero-content h1 { font-size: 3rem; margin-bottom: 1rem; }
-    .btn-primary { background: #a83232; color: #fff; padding: 1rem 2rem; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; }
-    .btn-primary:hover { background: #822e2e; }
-    section#products, section#contact { padding: 4rem 1rem; }
-    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1200px; margin: auto; }
-    .product { background: #fff; padding: 1rem; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: center; }
-    .price { color: #a83232; font-weight: bold; font-size: 1.2rem; margin: 1rem 0; }
-    .product button { background: #a83232; color: white; padding: 10px 15px; border: none; border-radius: 5px; cursor: pointer; }
-    .product button:hover { background: #822e2e; }
-    .cart-drawer { position: fixed; top: 0; right: -320px; width: 320px; height: 100%; background: #fff; box-shadow: -2px 0 8px rgba(0,0,0,0.1); transition: right .3s; z-index: 1001; display: flex; flex-direction: column; }
-    .cart-drawer.open { right: 0; }
-    .cart-header, .cart-footer { padding: 1rem; border-bottom: 1px solid #eee; }
-    .cart-items { flex: 1; padding: 1rem; overflow-y: auto; }
-    .cart-item { margin-bottom: .75rem; border-bottom: 1px solid #f0f0f0; padding-bottom: .5rem; }
-    .checkout-btn { width: 100%; background: #822e2e; color: white; padding: 10px; border: none; border-radius: 4px; cursor: pointer; }
-    footer { background-color: #a83232; color: #fff; text-align: center; padding: 2rem .5rem; }
-    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); display: none; z-index: 1002; }
-    .login-popup { position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%); background: #fff; padding: 2rem; border-radius: 8px; width: 320px; box-shadow: 0 0 12px rgba(0,0,0,0.2); z-index: 1003; display: none; }
-    .login-popup input { width: 100%; padding: .75rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:'Segoe UI',sans-serif; color:#333; line-height:1.6; }
+    a { text-decoration:none; color:inherit; }
+    ul { list-style:none; }
+    header { position:fixed; top:0; width:100%; z-index:1000; background:#fff; box-shadow:0 2px 8px rgba(0,0,0,0.1);}
+    .nav-container { max-width:1200px; margin:auto; display:flex; align-items:center; justify-content:space-between; padding:1rem; }
+    .logo { font-weight:bold; font-size:1.5rem; color:#a83232; }
+    nav ul { display:flex; gap:2rem; align-items:center; }
+    nav a { font-weight:600; color:#333; cursor:pointer; }
+    .cart-icon { position:relative; cursor:pointer; font-size:1.25rem; }
+    .cart-count { position:absolute; top:-6px; right:-6px; background:#a83232; color:#fff; font-size:.75rem; padding:2px 6px; border-radius:50%; }
+    .hero { height:70vh; background:#f4f0ec; display:flex; align-items:center; justify-content:center; text-align:center; padding-top:80px; }
+    .hero h1 { font-size:2.75rem; margin-bottom:1rem; }
+    .btn-primary { background:#a83232; color:#fff; padding:1rem 2rem; border:none; border-radius:5px; cursor:pointer; }
+    .btn-primary:hover { background:#822e2e; }
+    section { padding:4rem 1rem; max-width:1200px; margin:auto; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; }
+    .product, .review { background:#fff; padding:1.5rem; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.05); }
+    .product h3 { margin-bottom:.5rem; }
+    .price { color:#a83232; font-weight:bold; margin-bottom:1rem; }
+    .product button, .checkout-btn { background:#a83232; color:#fff; border:none; padding:.75rem 1.25rem; border-radius:5px; cursor:pointer; }
+    .product button:hover, .checkout-btn:hover { background:#822e2e; }
+    #reviews .review p { margin-bottom:.75rem; font-style:italic; }
+    #reviews .review strong { color:#555; }
+    .cart-drawer { position:fixed; top:0; right:-360px; width:360px; height:100%; background:#fff; box-shadow:-2px 0 12px rgba(0,0,0,0.15); transition:right .3s; z-index:1001; display:flex; flex-direction:column; }
+    .cart-drawer.open { right:0; }
+    .cart-header { padding:1.5rem; border-bottom:1px solid #eee; display:flex; justify-content:space-between; align-items:center; }
+    .cart-items { flex:1; overflow-y:auto; padding:1.5rem; }
+    .cart-item { margin-bottom:.75rem; }
+    .cart-footer { padding:1.5rem; border-top:1px solid #eee; }
+    .login-section { padding:4rem 1rem; background:#f9f7f4; margin-top:2rem; border-radius:8px; max-width:400px; margin:auto; }
+    .login-section input { width:100%; padding:.75rem; margin-bottom:1rem; border:1px solid #ccc; border-radius:5px; }
+    .overlay, .cart-drawer, .login-section { display:none; }
+    .overlay.show { display:block; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; }
+    footer { background:#a83232; color:#fff; text-align:center; padding:2rem 1rem; margin-top:2rem; }
   </style>
 </head>
 <body>
@@ -47,181 +51,123 @@ website for homemade products
     <div class="logo">RasoiRoots</div>
     <nav>
       <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#products">Products</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a onclick="scrollToSection('home')">Home</a></li>
+        <li><a onclick="scrollToSection('products')">Products</a></li>
+        <li><a onclick="scrollToSection('contact')">Contact</a></li>
+        <li><a onclick="scrollToSection('login-section')">Login</a></li>
       </ul>
     </nav>
     <div>
-      <button onclick="showLogin()">Login</button>
-      <span class="cart-icon" onclick="toggleCart()">🛒<span class="cart-count" id="cart-count">0</span></span>
+      <span class="cart-icon" onclick="toggleCart()">🛒<span id="cart-count" class="cart-count">0</span></span>
     </div>
   </div>
 </header>
 
-<div class="hero" id="home">
-  <div class="hero-content">
+<div id="home" class="hero">
+  <div>
     <h1>Pure & Homemade Spices for Authentic Flavour</h1>
     <p>Hand-crafted blends to bring warmth & depth to your meals.</p>
-    <button class="btn-primary" onclick="document.getElementById('products').scrollIntoView()">Shop Now</button>
+    <button class="btn-primary" onclick="scrollToSection('products')">Shop Now</button>
   </div>
 </div>
 
 <section id="products">
-  <h2 style="text-align:center;margin-bottom:2rem;">Our Products</h2>
-  <div class="products-grid">
+  <h2 style="text-align:center; margin-bottom:2rem;">Our Products</h2>
+  <div class="grid">
+    <div class="product"><h3>Red Chilly Powder</h3><p class="price">₹70 / 200g</p><button onclick="addToCart('Red Chilly Powder')">Add to Cart</button></div>
+    <div class="product"><h3>Coriander Powder</h3><p class="price">₹60 / 200g</p><button onclick="addToCart('Coriander Powder')">Add to Cart</button></div>
+    <div class="product"><h3>Turmeric Powder</h3><p class="price">₹70 / 200g</p><button onclick="addToCart('Turmeric Powder')">Add to Cart</button></div>
+    <div class="product"><h3>Garam Masala</h3><p class="price">₹200 / 200g</p><button onclick="addToCart('Garam Masala')">Add to Cart</button></div>
+    <div class="product"><h3>Cumin Seeds</h3><p class="price">₹90 / 200g</p><button onclick="addToCart('Cumin Seeds')">Add to Cart</button></div>
+    <div class="product"><h3>Besan (Gram Flour)</h3><p class="price">₹100 / 1kg</p><button onclick="addToCart('Besan')">Add to Cart</button></div>
+    <div class="product"><h3>Mustard Oil</h3><p class="price">₹160 / 1kg</p><button onclick="addToCart('Mustard Oil')">Add to Cart</button></div>
+  </div>
+</section>
 
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?red-chili,spices" alt="Red Chilly Powder" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Red Chilly Powder</h3>
-      <p class="price">₹70 / 200g</p>
-      <button onclick="addToCart('Red Chilly Powder')">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?coriander,spices" alt="Coriander Powder" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Coriander Powder</h3>
-      <p class="price">₹60 / 200g</p>
-      <button onclick="addToCart('Coriander Powder')">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?turmeric,spices" alt="Turmeric Powder" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Turmeric Powder</h3>
-      <p class="price">₹70 / 200g</p>
-      <button onclick="addToCart('Turmeric Powder')">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?garam-masala" alt="Garam Masala" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Garam Masala</h3>
-      <p class="price">₹200 / 200g</p>
-      <button onclick="addToCart('Garam Masala')">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?cumin,jeera" alt="Cumin Seeds" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Cumin Seeds (Jeera)</h3>
-      <p class="price">₹90 / 200g</p>
-      <button onclick="addToCart('Cumin Seeds')">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?besan,gram-flour" alt="Besan" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Besan (Gram Flour)</h3>
-      <p class="price">₹100 / 1kg</p>
-      <button onclick="addToCart('Besan')">Add to Cart</button>
-    </div>
-
-    <div class="product">
-      <img src="https://source.unsplash.com/300x200/?mustard-oil" alt="Mustard Oil" style="width:100%; border-radius:8px; margin-bottom:10px;">
-      <h3>Mustard Oil</h3>
-      <p class="price">₹160 / 1kg</p>
-      <button onclick="addToCart('Mustard Oil')">Add to Cart</button>
-    </div>
-
+<section id="reviews">
+  <h2 style="text-align:center; margin-bottom:2rem;">Customer Reviews</h2>
+  <div class="grid">
+    <div class="review"><p>“Absolutely love the flavors! My go-to for daily cooking.”</p><strong>– Seema K., Gurugram</strong></div>
+    <div class="review"><p>“High-quality spices with authentic taste. Will purchase again!”</p><strong>– Rajiv S., Bulandshahr</strong></div>
+    <div class="review"><p>“Fresh, aromatic, and perfect texture. Highly recommended.”</p><strong>– Anjali P., Noida</strong></div>
   </div>
 </section>
 
 <section id="contact">
-  <h2 style="text-align:center;margin-bottom:1rem;">Contact Us</h2>
-  <p style="text-align:center;">
-    Email: rasoiroots@gmail.com<br>
-    Phone: 8954152963, 9411911398<br>
-    Address: Village – Atmadsarai, 203408, Bulandshahr
-  </p>
+  <h2 style="text-align:center;margin-bottom:2rem;">Contact Us</h2>
+  <p style="text-align:center;">Email: rasoiroots@gmail.com<br>Phone: 8954152963, 9411911398<br>Address: Village – Atmadsarai, 203408, Bulandshahr</p>
   <iframe src="https://www.google.com/maps?q=Atmadsarai+Bulandshahr&output=embed"
     width="100%" height="300" style="border:0;border-radius:8px;margin-top:2rem;" loading="lazy"></iframe>
 </section>
+
+<section id="login-section" class="login-section">
+  <h2 style="text-align:center;margin-bottom:1rem;">Member Login</h2>
+  <input id="email" type="email" placeholder="Email">
+  <input id="password" type="password" placeholder="Password">
+  <button onclick="loginUser()">Login</button>
+</section>
+
+<div id="cartDrawer" class="cart-drawer">
+  <div class="cart-header"><h4>Your Cart</h4><button onclick="toggleCart()">✕</button></div>
+  <div id="cartItems" class="cart-items"></div>
+  <div class="cart-footer">
+    <button class="checkout-btn" onclick="checkout()">Checkout</button>
+    <hr style="margin:1rem 0;">
+    <h4>Track Order</h4>
+    <input id="orderId" type="text" placeholder="Order ID (e.g. #1234)" style="width:100%; padding:.75rem; border:1px solid #ccc; border-radius:5px; margin: .5rem 0;">
+    <button class="checkout-btn" onclick="trackOrder()">Track</button>
+    <p id="trackResult" style="margin-top:.75rem; color:#444;"></p>
+  </div>
+</div>
+
+<div id="overlay" class="overlay"></div>
 
 <footer>
   &copy; 2025 RasoiRoots | Cash on Delivery Only | Designed with ❤️
 </footer>
 
-<!-- Cart Drawer -->
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-header">
-    <h4>Your Cart</h4>
-    <button onclick="toggleCart()">✕</button>
-  </div>
-  <div class="cart-items" id="cartItemsList"></div>
-  <div class="cart-footer">
-    <button class="checkout-btn" onclick="checkout()">Checkout</button>
-    <hr style="margin: 1rem 0;">
-    <h4 style="margin-bottom: 0.5rem;">Track Order</h4>
-    <input type="text" id="orderId" placeholder="Enter Order ID (e.g. #1234)" style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
-    <button class="checkout-btn" onclick="trackOrder()">Track</button>
-    <div id="trackResult" style="margin-top: 10px; font-size: 0.9rem;"></div>
-  </div>
-</div>
-
-<div class="overlay" id="overlay" onclick="closeLogin()"></div>
-<div class="login-popup" id="loginPopup">
-  <h3>Login</h3>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="loginUser()">Login</button>
-</div>
-
 <script>
-  let cart = [];
+  function scrollToSection(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
 
+  let cart = [];
   function toggleCart() {
     document.getElementById('cartDrawer').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('show');
   }
 
   function addToCart(item) {
     cart.push(item);
     document.getElementById('cart-count').textContent = cart.length;
-    renderCart();
-    document.getElementById('cartDrawer').classList.add('open');
+    updateCartItems();
+    if (!document.getElementById('cartDrawer').classList.contains('open')) toggleCart();
   }
 
-  function renderCart() {
-    const list = document.getElementById('cartItemsList');
-    list.innerHTML = cart.map((item, i) => `<div class="cart-item">${i + 1}. ${item}</div>`).join('');
+  function updateCartItems() {
+    document.getElementById('cartItems').innerHTML =
+      cart.map((itm,i)=>`<div class="cart-item">${i+1}. ${itm}</div>`).join('');
   }
 
   function checkout() {
-    if (!cart.length) return alert("Your cart is empty.");
-    alert("Order received: " + cart.join(", "));
-    cart = [];
-    document.getElementById('cart-count').textContent = 0;
-    renderCart();
+    if (!cart.length) return alert('Cart is empty');
+    alert('Order placed: ' + cart.join(', '));
+    cart=[]; document.getElementById('cart-count').textContent=0; updateCartItems();
     toggleCart();
   }
 
   function trackOrder() {
-    const id = document.getElementById("orderId").value.trim();
-    const result = document.getElementById("trackResult");
-    if (!id) {
-      result.innerHTML = "⚠️ Please enter a valid Order ID.";
-    } else {
-      result.innerHTML = `📦 Order <strong>${id}</strong> is being processed.<br>Expected delivery: <strong>3–5 business days</strong>.`;
-    }
-  }
-
-  function showLogin() {
-    document.getElementById("overlay").style.display = "block";
-    document.getElementById("loginPopup").style.display = "block";
-  }
-
-  function closeLogin() {
-    document.getElementById("overlay").style.display = "none";
-    document.getElementById("loginPopup").style.display = "none";
+    const id=document.getElementById('orderId').value.trim();
+    document.getElementById('trackResult').textContent = id
+      ? `📦 Order ${id} is in process. Delivery in 3–5 days.`
+      : '⚠️ Please enter a valid Order ID.';
   }
 
   function loginUser() {
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value.trim();
-    if (email === "user@example.com" && password === "password123") {
-      alert("Login successful!");
-      closeLogin();
-    } else {
-      alert("Invalid email or password.");
-    }
+    const email=document.getElementById('email').value.trim();
+    const pwd=document.getElementById('password').value.trim();
+    alert(email==='user@example.com'&&pwd==='password123' ? 'Login successful' : 'Login failed');
   }
 </script>
-
 </body>
 </html>
