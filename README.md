@@ -1,6 +1,6 @@
 Rasoi Roots
 website for homemade products
-<!DOCTYPE html>
+Made in India
 <html lang="en">
 
 <head>
