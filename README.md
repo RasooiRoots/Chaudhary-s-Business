@@ -2,155 +2,236 @@ Rasoi Roots
 website for homemade products
 Made in India
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RasoiRoots</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <title>RasoiRoots - Natural Spices</title>
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: #fefefe;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: #fff;
     }
-    .luxury-bg {
-      background: linear-gradient(145deg, #fdf0ec, #f3e1dc);
+    header {
+      background-color: #222;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .luxury-card {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    header h1 {
+      margin: 0;
+      color: #ffa500;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .hero {
+      background: url('https://source.unsplash.com/1600x600/?spices,organic') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .hero h2 {
+      color: #fff;
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+    .hero button {
+      padding: 1rem 2rem;
+      font-size: 1.2rem;
+      background-color: #ffa500;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .section {
+      padding: 2rem;
+      background-color: #1c1c1c;
+    }
+    .section h3 {
+      text-align: center;
+      color: #ffa500;
+    }
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .product {
+      background-color: #333;
+      border: 1px solid #555;
+      padding: 1rem;
+      width: 200px;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .product h4 {
+      color: #ffa500;
+    }
+    .product button {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #ffa500;
+      color: #000;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .cart-popup, .login-popup {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #222;
+      padding: 2rem;
+      border-radius: 10px;
+      display: none;
+      z-index: 10;
+    }
+    .popup-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      display: none;
+      z-index: 5;
+    }
+    .map, .contact, .reviews {
+      margin-top: 2rem;
+    }
+    .cart-popup ul {
+      list-style: none;
+      padding: 0;
+    }
+    .cart-popup ul li {
+      margin-bottom: 10px;
+    }
+    .reviews p {
+      background: #444;
+      padding: 1rem;
+      border-radius: 5px;
+      margin: 0.5rem 0;
     }
   </style>
 </head>
-
-<body class="luxury-bg">
-  <header class="bg-red-700 text-white p-6 text-center shadow-md sticky top-0 z-50">
-    <h1 class="text-4xl font-bold">RasoiRoots</h1>
-    <nav class="mt-2 space-x-4">
-      <a href="#home" class="hover:underline">Home</a>
-      <a href="#products" class="hover:underline">Products</a>
-      <a href="#reviews" class="hover:underline">Reviews</a>
-      <a href="#contact" class="hover:underline">Contact</a>
-      <button onclick="toggleCart()" class="float-right relative">
-        <i class="fas fa-shopping-cart"></i>
-        <span id="cart-count" class="absolute top-0 right-0 bg-yellow-400 text-black rounded-full text-xs px-2">0</span>
-      </button>
+<body>
+  <header>
+    <h1>RasoiRoots</h1>
+    <nav>
+      <a href="#" onclick="toggleLoginPopup()">Login / Sign Up</a>
+      <a href="#" onclick="showCart()">Cart (<span id="cart-count">0</span>)</a>
     </nav>
   </header>
 
-  <main id="home" class="text-center py-20">
-    <h2 class="text-5xl font-bold text-red-700">Welcome to RasoiRoots</h2>
-    <p class="mt-4 text-gray-700 text-lg">Authentic Spices & Oils Straight from the Mill to Your Kitchen</p>
-  </main>
+  <div class="hero">
+    <h2>Pure. Authentic. Homemade Spices.</h2>
+    <button onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">Shop Now</button>
+  </div>
 
-  <section id="products" class="p-6 max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold text-red-700 mb-6">Our Products</h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      <!-- Product Items -->
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Garam Masala</h3>
-        <p>₹200</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Mustard Oil</h3>
-        <p>₹170</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Red Chilly Powder</h3>
-        <p>₹75</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Besan</h3>
-        <p>₹100</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Cumin Seeds</h3>
-        <p>₹110</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Turmeric Powder</h3>
-        <p>₹70</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
-      <div class="luxury-card p-6">
-        <h3 class="text-xl font-semibold">Dhaniya Powder</h3>
-        <p>₹80</p>
-        <button class="bg-red-700 text-white px-4 py-2 mt-2 rounded add-to-cart">Add to Cart</button>
-      </div>
+  <div class="section" id="products">
+    <h3>Our Products</h3>
+    <div class="products">
+      <div class="product"><h4>Red Chilly Powder</h4><p>₹75 (200g)</p><button onclick="addToCart('Red Chilly Powder', 75)">Add to Cart</button></div>
+      <div class="product"><h4>Garam Masala</h4><p>₹200 (200g)</p><button onclick="addToCart('Garam Masala', 200)">Add to Cart</button></div>
+      <div class="product"><h4>Turmeric Powder</h4><p>₹80 (200g)</p><button onclick="addToCart('Turmeric Powder', 80)">Add to Cart</button></div>
+      <div class="product"><h4>Dhania Powder</h4><p>₹80 (200g)</p><button onclick="addToCart('Dhania Powder', 80)">Add to Cart</button></div>
+      <div class="product"><h4>Cumin Seeds</h4><p>₹120 (200g)</p><button onclick="addToCart('Cumin Seeds', 120)">Add to Cart</button></div>
+      <div class="product"><h4>Mustard Oil</h4><p>₹170 (1L)</p><button onclick="addToCart('Mustard Oil', 170)">Add to Cart</button></div>
+      <div class="product"><h4>Besan</h4><p>₹100 (1kg)</p><button onclick="addToCart('Besan', 100)">Add to Cart</button></div>
     </div>
-  </section>
+  </div>
 
-  <section id="reviews" class="p-6 bg-gray-100">
-    <h2 class="text-3xl font-bold text-red-700 mb-4">Customer Reviews</h2>
-    <p>“Amazing quality and authentic flavors. Highly recommend RasoiRoots!”</p>
-  </section>
+  <div class="section reviews">
+    <h3>Customer Reviews</h3>
+    <p>🌟🌟🌟🌟🌟 - "The masalas are so authentic!" - Priya</p>
+    <p>🌟🌟🌟🌟 - "Great quality and packaging." - Aman</p>
+  </div>
 
-  <section id="contact" class="p-6">
-    <h2 class="text-3xl font-bold text-red-700 mb-4">Contact Us</h2>
-    <p class="mb-2">Phone: 941191198, 8954152963</p>
-    <iframe class="w-full h-64 border-none" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7013.10749881545!2d77.83320958044123!3d28.492982870475725!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ca3772100734b%3A0x2b85934592a389b9!2sBrajpal%20Madhyan-%20oil%20mill%20%2C%20flour%20mill%20and%20spices%20point.!5e0!3m2!1sen!2sin!4v1752819092269!5m2!1sen!2sin" allowfullscreen loading="lazy"></iframe>
-  </section>
-
-  <footer class="bg-red-700 text-white text-center p-4">
-    &copy; 2025 RasoiRoots. All rights reserved.
-  </footer>
-
-  <!-- Cart Modal -->
-  <div id="cart-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg p-6 w-96">
-      <h3 class="text-xl font-bold mb-4">Your Cart</h3>
-      <ul id="cart-items" class="space-y-2"></ul>
-      <button onclick="buyNow()" class="bg-green-600 text-white mt-4 px-4 py-2 rounded">Buy Now</button>
-      <button onclick="toggleCart()" class="mt-2 text-red-700 underline">Close</button>
+  <div class="section contact">
+    <h3>Contact Us</h3>
+    <p><strong>Address:</strong> Atmadsarai, 203408 (Bulandshahr)</p>
+    <p><strong>Phone:</strong> 8954152963, 9411911398</p>
+    <div class="map">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7013.10749881545!2d77.83320958044123!3d28.492982870475725!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ca3772100734b%3A0x2b85934592a389b9!2sBrajpal%20Madhyan-%20oil%20mill%20%2C%20flour%20mill%20and%20spices%20point.!5e0!3m2!1sen!2sin!4v1752819092269!5m2!1sen!2sin" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
+  </div>
+
+  <div class="popup-bg" id="popup-bg" onclick="closePopups()"></div>
+  <div class="cart-popup" id="cart-popup">
+    <h3>Your Cart</h3>
+    <ul id="cart-items"></ul>
+    <p><strong>Total:</strong> ₹<span id="cart-total">0</span></p>
+    <button onclick="checkout()">Buy Now</button>
+    <button onclick="closePopups()">Close</button>
+  </div>
+  <div class="login-popup" id="login-popup">
+    <h3>Login / Sign Up</h3>
+    <input type="text" placeholder="Username" /><br><br>
+    <input type="password" placeholder="Password" /><br><br>
+    <button onclick="alert('Logged in!')">Submit</button>
+    <button onclick="closePopups()">Close</button>
   </div>
 
   <script>
     let cart = [];
 
-    document.querySelectorAll('.add-to-cart').forEach((btn, index) => {
-      btn.addEventListener('click', () => {
-        const name = btn.parentElement.querySelector('h3').innerText;
-        const price = btn.parentElement.querySelector('p').innerText;
-        cart.push({ name, price });
-        updateCart();
-      });
-    });
-
-    function updateCart() {
-      const cartItems = document.getElementById('cart-items');
-      cartItems.innerHTML = '';
-      cart.forEach((item, index) => {
-        const li = document.createElement('li');
-        li.innerHTML = `${item.name} - ${item.price} <button onclick="removeFromCart(${index})" class="text-red-500 ml-2">Remove</button>`;
-        cartItems.appendChild(li);
-      });
-      document.getElementById('cart-count').innerText = cart.length;
+    function addToCart(product, price) {
+      cart.push({ product, price });
+      updateCartDisplay();
     }
 
-    function toggleCart() {
-      document.getElementById('cart-modal').classList.toggle('hidden');
+    function updateCartDisplay() {
+      const items = document.getElementById('cart-items');
+      items.innerHTML = '';
+      let total = 0;
+      cart.forEach((item, index) => {
+        total += item.price;
+        items.innerHTML += `<li>${item.product} - ₹${item.price} <button onclick="removeFromCart(${index})">Remove</button></li>`;
+      });
+      document.getElementById('cart-count').innerText = cart.length;
+      document.getElementById('cart-total').innerText = total;
     }
 
     function removeFromCart(index) {
       cart.splice(index, 1);
-      updateCart();
+      updateCartDisplay();
     }
 
-    function buyNow() {
+    function showCart() {
+      document.getElementById('popup-bg').style.display = 'block';
+      document.getElementById('cart-popup').style.display = 'block';
+    }
+
+    function toggleLoginPopup() {
+      document.getElementById('popup-bg').style.display = 'block';
+      document.getElementById('login-popup').style.display = 'block';
+    }
+
+    function closePopups() {
+      document.getElementById('popup-bg').style.display = 'none';
+      document.getElementById('cart-popup').style.display = 'none';
+      document.getElementById('login-popup').style.display = 'none';
+    }
+
+    function checkout() {
       alert('Thank you for your purchase!');
       cart = [];
-      updateCart();
-      toggleCart();
+      updateCartDisplay();
+      closePopups();
     }
   </script>
 </body>
-
 </html>
