@@ -107,6 +107,12 @@ Made in India
     .suggestion-item:hover, .suggestion-item.selected {
       background-color: #FF6F61;
     }
+    #coupon-message {
+      display: none;
+      color: #FFFFFF;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
   </style>
 </head>
 <body>
@@ -146,6 +152,7 @@ Made in India
     <h2 class="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">Vibrant Indian Spices, Crafted with Passion</h2>
     <p class="text-lg md:text-xl mb-8 font-light max-w-2xl">Discover the bold, authentic flavors of India, handcrafted to elevate your culinary experience.</p>
     <button onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })" class="btn-gold text-teal-900 px-8 py-4 rounded-lg font-semibold text-lg transition duration-300">Shop Our Collection</button>
+    <p class="text-lg font-semibold mt-4">Get 10% off on your first order and 5% off on signup!</p>
   </div>
 
   <!-- Products Section -->
@@ -224,6 +231,13 @@ Made in India
   <div class="cart-popup fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-teal-900 p-8 rounded-xl shadow-2xl hidden z-20 max-w-lg w-full" id="cart-popup">
     <h3 class="text-2xl font-bold text-gold-400 mb-6">Your Cart</h3>
     <ul id="cart-items" class="space-y-3"></ul>
+    <div class="mt-6">
+      <div class="flex items-center space-x-2">
+        <input type="text" id="coupon-code" placeholder="Enter coupon code" class="w-full p-2 rounded-lg border border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-500 bg-teal-800 text-white" />
+        <button onclick="applyCoupon()" class="btn-gold text-teal-900 px-4 py-2 rounded-lg font-semibold transition duration-300">Apply</button>
+      </div>
+      <div id="coupon-message"></div>
+    </div>
     <p class="mt-6 text-white"><strong>Total:</strong> ₹<span id="cart-total">0</span></p>
     <div class="flex justify-end space-x-3 mt-6">
       <button onclick="checkout()" class="btn-gold text-teal-900 px-5 py-2 rounded-lg font-semibold transition duration-300">Buy Now</button>
@@ -237,13 +251,16 @@ Made in India
     <input type="text" placeholder="Username" class="w-full p-3 mb-4 border border-gold-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-teal-900 text-white" />
     <input type="password" placeholder="Password" class="w-full p-3 mb-4 border border-gold-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold-500 bg-teal-900 text-white" />
     <div class="flex justify-end space-x-3">
-      <button onclick="alert('Logged in!')" class="btn-gold text-teal-900 px-5 py-2 rounded-lg font-semibold transition duration-300">Submit</button>
+      <button onclick="handleLogin()" class="btn-gold text-teal-900 px-5 py-2 rounded-lg font-semibold transition duration-300">Submit</button>
       <button onclick="closePopups()" class="bg-teal-700 text-white px-5 py-2 rounded-lg font-semibold hover:bg-teal-600 transition duration-300">Close</button>
     </div>
   </div>
 
   <script>
     let cart = [];
+    let isLoggedIn = false;
+    let isFirstOrder = true;
+    let appliedCoupon = null;
     const products = [
       'Red Chilly Powder',
       'Garam Masala',
@@ -253,6 +270,10 @@ Made in India
       'Mustard Oil',
       'Besan'
     ];
+    const coupons = {
+      'FIRST10': { discount: 0.10, condition: () => isFirstOrder },
+      'SIGNUP5': { discount: 0.05, condition: () => isLoggedIn }
+    };
 
     function addToCart(product, price) {
       cart.push({ product, price });
@@ -278,13 +299,36 @@ Made in India
         total += item.price;
         items.innerHTML += `<li class="flex justify-between items-center text-white"><span>${item.product} - ₹${item.price}</span><button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-300 font-semibold">Remove</button></li>`;
       });
+      if (appliedCoupon) {
+        const discount = coupons[appliedCoupon].discount;
+        total = total * (1 - discount);
+      }
       document.getElementById('cart-count').innerText = cart.length;
-      document.getElementById('cart-total').innerText = total;
+      document.getElementById('cart-total').innerText = Math.round(total);
     }
 
     function removeFromCart(index) {
       cart.splice(index, 1);
       updateCartDisplay();
+    }
+
+    function applyCoupon() {
+      const couponCode = document.getElementById('coupon-code').value.trim().toUpperCase();
+      const couponMessage = document.getElementById('coupon-message');
+      
+      if (coupons[couponCode] && coupons[couponCode].condition()) {
+        appliedCoupon = couponCode;
+        couponMessage.style.display = 'block';
+        couponMessage.innerText = `Coupon "${couponCode}" applied! ${coupons[couponCode].discount * 100}% off`;
+        couponMessage.style.color = '#FFD700';
+        updateCartDisplay();
+      } else {
+        appliedCoupon = null;
+        couponMessage.style.display = 'block';
+        couponMessage.innerText = 'Invalid or inapplicable coupon code.';
+        couponMessage.style.color = '#FF6F61';
+        updateCartDisplay();
+      }
     }
 
     function showCart() {
@@ -303,13 +347,25 @@ Made in India
       document.getElementById('login-popup').style.display = 'none';
     }
 
+    function handleLogin() {
+      isLoggedIn = true;
+      showCartNotification('Logged in! Use SIGNUP5 for 5% off.');
+      closePopups();
+    }
+
     function checkout() {
       if (cart.length === 0) {
         alert('Your cart is empty!');
         return;
       }
       alert('Thank you for your purchase!');
+      if (appliedCoupon === 'FIRST10') {
+        isFirstOrder = false;
+      }
       cart = [];
+      appliedCoupon = null;
+      document.getElementById('coupon-code').value = '';
+      document.getElementById('coupon-message').style.display = 'none';
       updateCartDisplay();
       closePopups();
     }
@@ -439,3 +495,6 @@ Made in India
   </script>
 </body>
 </html>
+
+
+  
