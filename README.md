@@ -1,6 +1,6 @@
 Rasoi Roots
 website for homemade products,
-Made in India.
+Made in India.<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -194,7 +194,7 @@ Made in India.
     /* Hero Section */
     .hero {
       height: 600px;
-      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1511836953460-80a2b1c6a896?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
       background-size: cover;
       background-position: center;
       display: flex;
@@ -597,69 +597,6 @@ Made in India.
       font-size: 14px;
     }
     
-    /* Newsletter Section */
-    .newsletter-section {
-      background: linear-gradient(135deg, var(--secondary) 0%, #1e2a1f 100%);
-      padding: 80px 30px;
-      color: var(--white);
-      margin-bottom: 80px;
-    }
-    
-    .newsletter-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    
-    .newsletter-title {
-      font-size: 36px;
-      margin-bottom: 20px;
-      font-weight: 500;
-    }
-    
-    .newsletter-subtitle {
-      font-size: 18px;
-      color: #d1d9d1;
-      margin-bottom: 40px;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
-    }
-    
-    .newsletter-form {
-      display: flex;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    
-    .newsletter-input {
-      flex: 1;
-      height: 50px;
-      border: none;
-      padding: 0 20px;
-      font-size: 16px;
-      border-radius: 4px 0 0 4px;
-      outline: none;
-    }
-    
-    .newsletter-button {
-      height: 50px;
-      width: 120px;
-      border: none;
-      background-color: var(--gold);
-      color: var(--secondary);
-      font-size: 16px;
-      font-weight: 600;
-      border-radius: 0 4px 4px 0;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    
-    .newsletter-button:hover {
-      background-color: #e8c340;
-    }
-    
     /* Contact Section */
     .contact-section {
       padding: 80px 30px;
@@ -988,6 +925,187 @@ Made in India.
       text-decoration: underline;
     }
     
+    /* Payment Modal Styles */
+    .payment-section {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--light-gray);
+    }
+    
+    .payment-section h4 {
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: var(--secondary);
+    }
+  
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .payment-method {
+      border: 1px solid var(--light-gray);
+      border-radius: 8px;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .payment-method:hover {
+      border-color: var(--primary);
+      background-color: rgba(58, 125, 68, 0.05);
+    }
+    
+    .payment-method input[type="radio"] {
+      display: none;
+    }
+    
+    .payment-method input[type="radio"]:checked + label {
+      color: var(--primary);
+    }
+    
+    .payment-method label {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .payment-method img {
+      width: 40px;
+      height: 40px;
+      object-fit: contain;
+    }
+    
+    .payment-method i {
+      font-size: 24px;
+      color: var(--primary);
+      width: 40px;
+      text-align: center;
+    }
+    
+    .upi-id {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 15px 0;
+      padding: 10px 15px;
+      background-color: var(--light-bg);
+      border-radius: 8px;
+    }
+    
+    .upi-id span {
+      font-family: monospace;
+      font-size: 18px;
+      flex: 1;
+    }
+    
+    .upi-id button {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .upi-id button:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .qr-code {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .qr-code img {
+      max-width: 200px;
+      border: 1px solid var(--light-gray);
+      padding: 10px;
+      border-radius: 8px;
+    }
+    
+    .form-group {
+      margin-bottom: 15px;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 14px;
+      color: var(--dark-gray);
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--light-gray);
+      border-radius: 4px;
+      font-size: 15px;
+    }
+    
+    .form-group textarea {
+      resize: vertical;
+    }
+    
+    .payment-buttons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .payment-button {
+      padding: 12px 25px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex: 1;
+    }
+    
+    .payment-button.primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    
+    .payment-button.primary:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    .payment-button.secondary {
+      background-color: var(--light-gray);
+      color: var(--dark-text);
+    }
+    
+    .payment-button.secondary:hover {
+      background-color: #d8dbd8;
+    }
+    
+    #payment-summary {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 15px;
+    }
+    
+    .payment-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--light-gray);
+    }
+    
+    .payment-total {
+      font-size: 18px;
+      font-weight: 600;
+      text-align: right;
+      padding: 10px 0;
+    }
+    
     /* Responsive Styles */
     @media (max-width: 1200px) {
       .navbar {
@@ -999,7 +1117,7 @@ Made in India.
       }
       
       .products-section, .premium-showcase, .values-section, 
-      .testimonials-section, .newsletter-section, .contact-section {
+      .testimonials-section, .contact-section {
         padding-left: 20px;
         padding-right: 20px;
       }
@@ -1018,7 +1136,7 @@ Made in India.
         font-size: 28px;
       }
       
-      .premium-title, .values-title, .testimonials-title, .newsletter-title {
+      .premium-title, .values-title, .testimonials-title {
         font-size: 32px;
       }
     }
@@ -1137,20 +1255,6 @@ Made in India.
       .products-grid {
         grid-template-columns: 1fr;
       }
-      
-      .newsletter-form {
-        flex-direction: column;
-      }
-      
-      .newsletter-input {
-        border-radius: 4px;
-        margin-bottom: 10px;
-      }
-      
-      .newsletter-button {
-        width: 100%;
-        border-radius: 4px;
-      }
     }
   </style>
 </head>
@@ -1203,48 +1307,6 @@ Made in India.
     </div>
     <div class="products-grid" id="products-grid">
       <!-- Products will be loaded here by JavaScript -->
-    </div>
-  </div>
-  
-  <!-- Premium Showcase -->
-  <div class="premium-showcase">
-    <div class="premium-container">
-      <div class="premium-header">
-        <h2 class="premium-title">The RasoiRoots Difference</h2>
-        <p class="premium-subtitle">Discover why home chefs and professional cooks choose our spices for their authentic flavors and unparalleled quality</p>
-      </div>
-      <div class="premium-grid">
-        <div class="premium-card">
-          <div class="premium-image">
-            <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Traditional Methods">
-          </div>
-          <div class="premium-content">
-            <h3>Traditional Preparation</h3>
-            <p>Our spices are prepared using time-honored methods passed down through generations, ensuring authentic flavors that commercial brands can't match.</p>
-            <button class="premium-button">Learn More</button>
-          </div>
-        </div>
-        <div class="premium-card">
-          <div class="premium-image">
-            <img src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80" alt="Farm Fresh">
-          </div>
-          <div class="premium-content">
-            <h3>Direct from Farms</h3>
-            <p>We source directly from trusted farmers across India, cutting out middlemen to bring you the freshest ingredients at fair prices.</p>
-            <button class="premium-button">Our Sources</button>
-          </div>
-        </div>
-        <div class="premium-card">
-          <div class="premium-image">
-            <img src="https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Gift Sets">
-          </div>
-          <div class="premium-content">
-            <h3>Premium Gift Sets</h3>
-            <p>Our beautifully packaged gift collections make perfect presents for food lovers, featuring our most popular spices in elegant containers.</p>
-            <button class="premium-button">View Collections</button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   
@@ -1313,18 +1375,6 @@ Made in India.
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Newsletter Section -->
-  <div class="newsletter-section">
-    <div class="newsletter-container">
-      <h2 class="newsletter-title">Join Our Spice Community</h2>
-      <p class="newsletter-subtitle">Subscribe to receive exclusive offers, new product announcements, and authentic Indian recipes straight to your inbox</p>
-      <div class="newsletter-form">
-        <input type="email" class="newsletter-input" placeholder="Your email address">
-        <button class="newsletter-button">Subscribe</button>
       </div>
     </div>
   </div>
@@ -1414,7 +1464,83 @@ Made in India.
       </div>
       <div class="cart-buttons">
         <button class="cart-button secondary" onclick="toggleCartModal()">Continue Shopping</button>
-        <button class="cart-button primary" onclick="checkout()">Proceed to Buy</button>
+        <button class="cart-button primary" onclick="togglePaymentModal()">Proceed to Buy</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Payment Modal -->
+  <div class="modal-overlay" id="payment-modal">
+    <div class="modal">
+      <div class="modal-close" onclick="togglePaymentModal()">&times;</div>
+      <h3 class="modal-title">Complete Your Purchase</h3>
+      
+      <div class="payment-section">
+        <h4>Order Summary</h4>
+        <div id="payment-summary"></div>
+        <div class="payment-total">
+          Total: ₹<span id="payment-total">0</span>
+        </div>
+      </div>
+      
+      <div class="payment-section">
+        <h4>Select Payment Method</h4>
+        <div class="payment-methods">
+          <div class="payment-method" onclick="selectPaymentMethod('paytm')">
+            <input type="radio" name="payment" id="paytm-radio">
+            <label for="paytm-radio">
+              <img src="https://logos-download.com/wp-content/uploads/2020/06/Paytm_Logo_icon.png" alt="Paytm">
+              <span>Paytm</span>
+            </label>
+          </div>
+          
+          <div class="payment-method" onclick="selectPaymentMethod('phonepe')">
+            <input type="radio" name="payment" id="phonepe-radio">
+            <label for="phonepe-radio">
+              <img src="https://logos-download.com/wp-content/uploads/2021/01/PhonePe_Logo_icon.png" alt="PhonePe">
+              <span>PhonePe</span>
+            </label>
+          </div>
+          
+          <div class="payment-method" onclick="selectPaymentMethod('cod')">
+            <input type="radio" name="payment" id="cod-radio">
+            <label for="cod-radio">
+              <i class="fas fa-money-bill-wave"></i>
+              <span>Cash on Delivery</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      
+      <div class="payment-section" id="upi-details" style="display:none;">
+        <h4>UPI Payment Details</h4>
+        <p>Please send payment to our UPI ID:</p>
+        <div class="upi-id">
+          <span>9411911398@paytm</span>
+          <button onclick="copyUpiId()">Copy</button>
+        </div>
+        <p>Or scan this QR code:</p>
+        <div class="qr-code">
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=9411911398@paytm" alt="UPI QR Code">
+        </div>
+        <div class="form-group">
+          <label for="transaction-id">Transaction ID (after payment):</label>
+          <input type="text" id="transaction-id" placeholder="Enter UPI transaction ID">
+        </div>
+      </div>
+      
+      <div class="payment-section" id="cod-details" style="display:none;">
+        <h4>Cash on Delivery</h4>
+        <p>Pay when your order is delivered. Please have exact change ready.</p>
+        <div class="form-group">
+          <label for="delivery-address">Delivery Address:</label>
+          <textarea id="delivery-address" rows="4" placeholder="Enter your complete address"></textarea>
+        </div>
+      </div>
+      
+      <div class="payment-buttons">
+        <button class="payment-button secondary" onclick="togglePaymentModal()">Back to Cart</button>
+        <button class="payment-button primary" onclick="confirmPayment()">Confirm Order</button>
       </div>
     </div>
   </div>
@@ -1527,6 +1653,13 @@ Made in India.
       updateCartDisplay();
     }
     
+    function togglePaymentModal() {
+      document.getElementById('payment-modal').classList.toggle('active');
+      if (document.getElementById('payment-modal').classList.contains('active')) {
+        updatePaymentSummary();
+      }
+    }
+    
     function toggleLoginModal() {
       document.getElementById('login-modal').classList.toggle('active');
     }
@@ -1628,29 +1761,111 @@ Made in India.
       }
     }
     
+    // Payment functions
+    function selectPaymentMethod(method) {
+      document.getElementById('upi-details').style.display = 'none';
+      document.getElementById('cod-details').style.display = 'none';
+      
+      if (method === 'paytm' || method === 'phonepe') {
+        document.getElementById('upi-details').style.display = 'block';
+      } else if (method === 'cod') {
+        document.getElementById('cod-details').style.display = 'block';
+      }
+      
+      // Update the radio button
+      document.getElementById(`${method}-radio`).checked = true;
+    }
+    
+    function copyUpiId() {
+      navigator.clipboard.writeText('9411911398@paytm');
+      alert('UPI ID copied to clipboard!');
+    }
+    
+    function updatePaymentSummary() {
+      const summaryContainer = document.getElementById('payment-summary');
+      summaryContainer.innerHTML = '';
+      
+      if (cart.length === 0) {
+        summaryContainer.innerHTML = '<p>No items in cart</p>';
+        document.getElementById('payment-total').textContent = '0';
+        return;
+      }
+      
+      let subtotal = 0;
+      cart.forEach(item => {
+        subtotal += item.price;
+        
+        const itemElement = document.createElement('div');
+        itemElement.className = 'payment-item';
+        itemElement.innerHTML = `
+          <span>${item.name}</span>
+          <span>₹${item.price}</span>
+        `;
+        summaryContainer.appendChild(itemElement);
+      });
+      
+      // Calculate total with coupon if applied
+      let total = subtotal;
+      if (appliedCoupon) {
+        if (appliedCoupon.type === 'percentage') {
+          const discountAmount = (subtotal * appliedCoupon.discount) / 100;
+          total = subtotal - discountAmount;
+          
+          const discountElement = document.createElement('div');
+          discountElement.className = 'payment-item';
+          discountElement.innerHTML = `
+            <span>Discount (${appliedCoupon.discount}%)</span>
+            <span>-₹${discountAmount.toFixed(2)}</span>
+          `;
+          summaryContainer.appendChild(discountElement);
+        }
+      }
+      
+      document.getElementById('payment-total').textContent = total.toFixed(2);
+    }
+    
+    function confirmPayment() {
+      const selectedPayment = document.querySelector('input[name="payment"]:checked');
+      if (!selectedPayment) {
+        alert('Please select a payment method');
+        return;
+      }
+      
+      const paymentMethod = selectedPayment.id.replace('-radio', '');
+      let message = `Order confirmed! Total: ₹${document.getElementById('payment-total').textContent}\n\n`;
+      
+      if (paymentMethod === 'cod') {
+        const address = document.getElementById('delivery-address').value.trim();
+        if (!address) {
+          alert('Please enter your delivery address');
+          return;
+        }
+        message += `Your order will be delivered to:\n${address}\n\nPlease pay ₹${document.getElementById('payment-total').textContent} when your order arrives.`;
+      } else {
+        message += `Please complete your ${paymentMethod === 'paytm' ? 'Paytm' : 'PhonePe'} payment to UPI ID: 9411911398@paytm\n\n`;
+        
+        const transactionId = document.getElementById('transaction-id').value.trim();
+        if (transactionId) {
+          message += `Transaction ID: ${transactionId}\nWe'll verify your payment and process your order.`;
+        } else {
+          message += `Once payment is complete, please share the transaction ID with us at 9411911398.`;
+        }
+      }
+      
+      alert(message);
+      
+      // Reset everything
+      cart = [];
+      appliedCoupon = null;
+      updateCartDisplay();
+      togglePaymentModal();
+      toggleCartModal();
+    }
+    
     // Handle login
     function handleLogin() {
       alert('Welcome back! As a thank you, use coupon code FIRST10 for 10% off your first order!');
       toggleLoginModal();
-    }
-    
-    function checkout() {
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
-      }
-      
-      let message = `Thank you for your order of ₹${document.getElementById('cart-total').textContent}!`;
-      
-      if (appliedCoupon) {
-        message += `\n\nYou saved ${appliedCoupon.discount}% with your coupon!`;
-      }
-      
-      alert(message);
-      cart = [];
-      appliedCoupon = null;
-      updateCartDisplay();
-      toggleCartModal();
     }
     
     // Close modals when clicking outside
@@ -1660,6 +1875,9 @@ Made in India.
       }
       if (event.target === document.getElementById('login-modal')) {
         toggleLoginModal();
+      }
+      if (event.target === document.getElementById('payment-modal')) {
+        togglePaymentModal();
       }
     });
   </script>
