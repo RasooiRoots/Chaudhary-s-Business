@@ -31,6 +31,36 @@ Made in India.
     body {
       background-color: var(--light-bg);
       color: var(--dark-text);
+      overflow-x: hidden;
+    }
+    
+    /* Loading Animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid var(--light-gray);
+      border-top: 5px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
     
     /* Coupon Banner */
@@ -191,10 +221,10 @@ Made in India.
       color: var(--gold);
     }
     
-    /* Hero Section */
+    /* Hero Section - Enhanced with Lazy Loading */
     .hero {
       height: 600px;
-      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1511836953460-80a2b1c6a896?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+      background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4));
       background-size: cover;
       background-position: center;
       display: flex;
@@ -205,6 +235,36 @@ Made in India.
       text-align: center;
       padding: 0 20px;
       margin-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    
+    .hero-image.loaded {
+      opacity: 1;
+    }
+    
+    .hero-content {
+      max-width: 800px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    
+    .hero-content.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
     
     .hero h1 {
@@ -240,6 +300,25 @@ Made in India.
     .hero-button:hover {
       background-color: #e8c340;
       transform: translateY(-2px);
+    }
+    
+    .hero-scroll-indicator {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+    }
+    
+    .hero-scroll-indicator i {
+      font-size: 30px;
+      color: var(--white);
+    }
+    
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {transform: translateY(0) translateX(-50%);}
+      40% {transform: translateY(-20px) translateX(-50%);}
+      60% {transform: translateY(-10px) translateX(-50%);}
     }
     
     /* Products Section */
@@ -723,6 +802,59 @@ Made in India.
       color: #a1b1a1;
     }
     
+    /* Newsletter Section */
+    .newsletter-section {
+      background-color: var(--primary);
+      padding: 60px 30px;
+      color: var(--white);
+      text-align: center;
+    }
+    
+    .newsletter-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+    
+    .newsletter-subtitle {
+      font-size: 18px;
+      margin-bottom: 40px;
+      opacity: 0.9;
+    }
+    
+    .newsletter-form {
+      display: flex;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    
+    .newsletter-input {
+      flex: 1;
+      padding: 15px 20px;
+      border: none;
+      border-radius: 4px 0 0 4px;
+      font-size: 16px;
+    }
+    
+    .newsletter-button {
+      background-color: var(--gold);
+      color: var(--secondary);
+      border: none;
+      padding: 0 25px;
+      font-weight: 600;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .newsletter-button:hover {
+      background-color: #e8c340;
+    }
+    
     /* Modal Styles */
     .modal-overlay {
       position: fixed;
@@ -1200,6 +1332,20 @@ Made in India.
       .contact-map iframe {
         height: 300px;
       }
+      
+      .newsletter-form {
+        flex-direction: column;
+      }
+      
+      .newsletter-input {
+        border-radius: 4px;
+        margin-bottom: 10px;
+      }
+      
+      .newsletter-button {
+        border-radius: 4px;
+        padding: 15px;
+      }
     }
     
     @media (max-width: 576px) {
@@ -1259,6 +1405,11 @@ Made in India.
   </style>
 </head>
 <body>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-spinner"></div>
+  </div>
+  
   <!-- Coupon Banner -->
   <div class="coupon-banner">
     <span>Sign up today and get <span class="coupon-code">WELCOME5</span> for 5% off!</span>
@@ -1292,11 +1443,23 @@ Made in India.
     <div class="categories-item">Blends</div>
   </div>
   
-  <!-- Hero Section -->
+  <!-- Hero Section - Enhanced with Lazy Loading -->
   <div class="hero">
-    <h1>Premium Homemade Spices</h1>
-    <p>Handcrafted using traditional methods for authentic Indian flavors that transform your cooking</p>
-    <button class="hero-button" onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">Shop Now</button>
+    <img 
+      src="https://images.unsplash.com/photo-1511836953460-80a2b1c6a896?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=20" 
+      data-src="https://images.unsplash.com/photo-1511836953460-80a2b1c6a896?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+      alt="Authentic Indian Spices" 
+      class="hero-image"
+      id="hero-image"
+    >
+    <div class="hero-content" id="hero-content">
+      <h1>Discover the Essence of Indian Cuisine</h1>
+      <p>Elevate your dishes with our handcrafted spices, sourced from the finest farms and crafted using age-old traditions for unparalleled flavor.</p>
+      <button class="hero-button" onclick="document.getElementById('products').scrollIntoView({ behavior: 'smooth' })">Explore Our Spices</button>
+    </div>
+    <div class="hero-scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
   </div>
   
   <!-- Products Section -->
@@ -1307,6 +1470,18 @@ Made in India.
     </div>
     <div class="products-grid" id="products-grid">
       <!-- Products will be loaded here by JavaScript -->
+    </div>
+  </div>
+  
+  <!-- Newsletter Section -->
+  <div class="newsletter-section">
+    <div class="newsletter-container">
+      <h2 class="newsletter-title">Join Our Spice Community</h2>
+      <p class="newsletter-subtitle">Subscribe to get exclusive offers, recipes, and updates on new products</p>
+      <div class="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="Enter your email address">
+        <button class="newsletter-button">Subscribe</button>
+      </div>
     </div>
   </div>
   
@@ -1564,14 +1739,86 @@ Made in India.
   <script>
     // Product data
     const products = [
-      { id: 1, name: "Red Chilly Powder (200g)", price: 75, category: "powders", isNew: false, isBestSeller: true },
-      { id: 2, name: "Garam Masala (200g)", price: 200, category: "blends", isNew: false, isBestSeller: true },
-      { id: 3, name: "Turmeric Powder (200g)", price: 80, category: "powders", isNew: false, isBestSeller: true },
-      { id: 4, name: "Dhania Powder (200g)", price: 80, category: "powders", isNew: true, isBestSeller: false },
-      { id: 5, name: "Cumin Seeds (200g)", price: 120, category: "whole", isNew: true, isBestSeller: false },
-      { id: 6, name: "Mustard Oil (1L)", price: 170, category: "oils", isNew: false, isBestSeller: true },
-      { id: 7, name: "Besan (1kg)", price: 100, category: "flours", isNew: false, isBestSeller: false },
-      { id: 8, name: "Black Pepper (100g)", price: 150, category: "whole", isNew: true, isBestSeller: false }
+      { 
+        id: 1, 
+        name: "Red Chilly Powder (200g)", 
+        price: 75, 
+        category: "powders", 
+        isNew: false, 
+        isBestSeller: true,
+        description: "Our fiery red chili powder is made from sun-dried, hand-picked chilies ground to perfection. Adds authentic heat and vibrant color to your dishes.",
+        image: "https://images.unsplash.com/photo-1576186726580-a816e8b12896?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 2, 
+        name: "Garam Masala (200g)", 
+        price: 200, 
+        category: "blends", 
+        isNew: false, 
+        isBestSeller: true,
+        description: "Our signature garam masala blend contains a perfect balance of 12 aromatic spices. Slow-roasted and ground for maximum flavor.",
+        image: "https://images.unsplash.com/photo-1586201375761-83865001e31c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 3, 
+        name: "Turmeric Powder (200g)", 
+        price: 80, 
+        category: "powders", 
+        isNew: false, 
+        isBestSeller: true,
+        description: "Pure, golden turmeric powder with its characteristic earthy flavor and brilliant color. Sourced directly from organic farms.",
+        image: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 4, 
+        name: "Dhania Powder (200g)", 
+        price: 80, 
+        category: "powders", 
+        isNew: true, 
+        isBestSeller: false,
+        description: "Freshly ground coriander powder with a citrusy, slightly sweet flavor. An essential ingredient in countless Indian dishes.",
+        image: "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 5, 
+        name: "Cumin Seeds (200g)", 
+        price: 120, 
+        category: "whole", 
+        isNew: true, 
+        isBestSeller: false,
+        description: "Premium quality cumin seeds with their distinctive earthy, nutty flavor. Perfect for tempering and seasoning.",
+        image: "https://images.unsplash.com/photo-1558961364-6c8b228a4683?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 6, 
+        name: "Mustard Oil (1L)", 
+        price: 170, 
+        category: "oils", 
+        isNew: false, 
+        isBestSeller: true,
+        description: "Cold-pressed mustard oil with its characteristic pungent aroma and rich flavor. Ideal for cooking and traditional remedies.",
+        image: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 7, 
+        name: "Besan (1kg)", 
+        price: 100, 
+        category: "flours", 
+        isNew: false, 
+        isBestSeller: false,
+        description: "Finely milled chickpea flour perfect for making pakoras, kadhi, and various Indian sweets. Gluten-free and protein-rich.",
+        image: "https://images.unsplash.com/photo-1599058917765-a780eda07a3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      },
+      { 
+        id: 8, 
+        name: "Black Pepper (100g)", 
+        price: 150, 
+        category: "whole", 
+        isNew: true, 
+        isBestSeller: false,
+        description: "Premium Malabar black pepper with a robust flavor and enticing aroma. Hand-harvested at peak maturity for optimal taste.",
+        image: "https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+      }
     ];
     
     let cart = [];
@@ -1585,7 +1832,16 @@ Made in India.
     
     // Initialize the page
     document.addEventListener('DOMContentLoaded', function() {
+      // Hide loader after page loads
+      setTimeout(() => {
+        document.getElementById('loader').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('loader').style.display = 'none';
+        }, 500);
+      }, 1500);
+      
       renderProducts();
+      lazyLoadHeroImage();
       
       // Check for first visit to show welcome coupon
       if (!localStorage.getItem('visitedBefore')) {
@@ -1593,6 +1849,20 @@ Made in India.
         showWelcomeNotification();
       }
     });
+    
+    // Lazy load hero image
+    function lazyLoadHeroImage() {
+      const heroImage = document.getElementById('hero-image');
+      const highResImage = new Image();
+      
+      highResImage.onload = function() {
+        heroImage.src = this.src;
+        heroImage.classList.add('loaded');
+        document.getElementById('hero-content').classList.add('visible');
+      };
+      
+      highResImage.src = heroImage.getAttribute('data-src');
+    }
     
     // Show welcome notification
     function showWelcomeNotification() {
@@ -1635,7 +1905,9 @@ Made in India.
       }
       
       const filtered = products.filter(product => 
-        product.name.toLowerCase().includes(searchTerm)
+        product.name.toLowerCase().includes(searchTerm) ||
+        product.category.toLowerCase().includes(searchTerm) ||
+        product.description.toLowerCase().includes(searchTerm)
       );
       renderProducts(filtered);
     }
@@ -1672,28 +1944,32 @@ Made in India.
         updateCartDisplay();
         
         // Show notification
-        const notification = document.createElement('div');
-        notification.style.position = 'fixed';
-        notification.style.bottom = '20px';
-        notification.style.right = '20px';
-        notification.style.backgroundColor = 'var(--primary)';
-        notification.style.color = 'white';
-        notification.style.padding = '15px 25px';
-        notification.style.borderRadius = '4px';
-        notification.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-        notification.style.zIndex = '1000';
-        notification.style.animation = 'fadeIn 0.3s';
-        notification.innerHTML = `${product.name} added to cart!`;
-        
-        document.body.appendChild(notification);
-        
-        setTimeout(() => {
-          notification.style.animation = 'fadeOut 0.3s';
-          setTimeout(() => {
-            document.body.removeChild(notification);
-          }, 300);
-        }, 2000);
+        showNotification(`${product.name} added to cart!`);
       }
+    }
+    
+    function showNotification(message) {
+      const notification = document.createElement('div');
+      notification.style.position = 'fixed';
+      notification.style.bottom = '20px';
+      notification.style.right = '20px';
+      notification.style.backgroundColor = 'var(--primary)';
+      notification.style.color = 'white';
+      notification.style.padding = '15px 25px';
+      notification.style.borderRadius = '4px';
+      notification.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
+      notification.style.zIndex = '1000';
+      notification.style.animation = 'fadeIn 0.3s';
+      notification.innerHTML = message;
+      
+      document.body.appendChild(notification);
+      
+      setTimeout(() => {
+        notification.style.animation = 'fadeOut 0.3s';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 2000);
     }
     
     function removeFromCart(index) {
@@ -1755,9 +2031,9 @@ Made in India.
         couponInput.value = '';
         
         // Show success notification
-        alert(`Coupon applied successfully! ${appliedCoupon.description}`);
+        showNotification(`Coupon applied successfully! ${appliedCoupon.description}`);
       } else {
-        alert('Invalid coupon code. Please try again.');
+        showNotification('Invalid coupon code. Please try again.');
       }
     }
     
@@ -1778,7 +2054,7 @@ Made in India.
     
     function copyUpiId() {
       navigator.clipboard.writeText('9411911398@paytm');
-      alert('UPI ID copied to clipboard!');
+      showNotification('UPI ID copied to clipboard!');
     }
     
     function updatePaymentSummary() {
@@ -1827,7 +2103,7 @@ Made in India.
     function confirmPayment() {
       const selectedPayment = document.querySelector('input[name="payment"]:checked');
       if (!selectedPayment) {
-        alert('Please select a payment method');
+        showNotification('Please select a payment method');
         return;
       }
       
@@ -1837,7 +2113,7 @@ Made in India.
       if (paymentMethod === 'cod') {
         const address = document.getElementById('delivery-address').value.trim();
         if (!address) {
-          alert('Please enter your delivery address');
+          showNotification('Please enter your delivery address');
           return;
         }
         message += `Your order will be delivered to:\n${address}\n\nPlease pay ₹${document.getElementById('payment-total').textContent} when your order arrives.`;
@@ -1852,7 +2128,7 @@ Made in India.
         }
       }
       
-      alert(message);
+      showNotification(message);
       
       // Reset everything
       cart = [];
@@ -1864,7 +2140,7 @@ Made in India.
     
     // Handle login
     function handleLogin() {
-      alert('Welcome back! As a thank you, use coupon code FIRST10 for 10% off your first order!');
+      showNotification('Welcome back! As a thank you, use coupon code FIRST10 for 10% off your first order!');
       toggleLoginModal();
     }
     
